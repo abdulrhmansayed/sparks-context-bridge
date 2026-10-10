@@ -1,0 +1,885 @@
+{
+  "title": "Ten-turn long-context comparison",
+  "date": "2026-10-10",
+  "model": "gpt-6.1-sol",
+  "effort": "medium",
+  "helperModel": "gpt-6-luna",
+  "history": {
+    "messages": 32,
+    "characters": 328410,
+    "sha256": "6776fa6ffb4e98b515b3daa74ce47dbae902355102d623bae04c2b61f277e436"
+  },
+  "newUserTurnsPerArm": 10,
+  "newTurnCharacters": [
+    {
+      "id": "t1",
+      "characters": 16683
+    },
+    {
+      "id": "t2",
+      "characters": 16670
+    },
+    {
+      "id": "t3",
+      "characters": 16581
+    },
+    {
+      "id": "t4",
+      "characters": 17100
+    },
+    {
+      "id": "t5",
+      "characters": 16583
+    },
+    {
+      "id": "t6",
+      "characters": 16611
+    },
+    {
+      "id": "t7",
+      "characters": 16570
+    },
+    {
+      "id": "t8",
+      "characters": 16694
+    },
+    {
+      "id": "t9",
+      "characters": 16698
+    },
+    {
+      "id": "t10",
+      "characters": 16868
+    }
+  ],
+  "ratesPerMillion": {
+    "gpt-6.1-sol": {
+      "fresh": 2,
+      "cached": 0.1,
+      "write": 2.5,
+      "output": 10
+    },
+    "gpt-6-luna": {
+      "fresh": 0.1,
+      "cached": 0.01,
+      "write": 0.125,
+      "output": 0.5
+    }
+  },
+  "pricingSources": [
+    "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+    "https://developers.openai.com/api/docs/models/gpt-6-luna",
+    "https://developers.openai.com/api/docs/guides/prompt-caching"
+  ],
+  "engines": {
+    "spark": "0.160.0 with custom context integration",
+    "codex": "0.162.0-alpha.17.2 official app-server"
+  },
+  "method": "Synthetic imported history; ten matched sequential long prompts; read-only evidence tools available to both; fresh Spark index counted once; one manual Codex compaction before turn 10; native backend completion timing, excluding desktop rendering.",
+  "arms": [
+    {
+      "name": "codex",
+      "main": {
+        "usd": 0.7928951999999999,
+        "inferences": 10,
+        "inputTokens": 1759692,
+        "cachedInputTokens": 1441152,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 1170
+      },
+      "initialIndex": {
+        "usd": 0,
+        "inferences": 0
+      },
+      "maintenance": {
+        "usd": 0,
+        "inferences": 0
+      },
+      "totalRecorded": {
+        "usd": 0.7928951999999999,
+        "inferences": 10,
+        "inputTokens": 1759692,
+        "cachedInputTokens": 1441152,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 1170
+      },
+      "setupSeconds": 6.9144123,
+      "indexSeconds": 0,
+      "replySeconds": 53.05851579999998,
+      "meanReplySeconds": 5.305851579999998,
+      "medianReplySeconds": 3.0432355999999854,
+      "firstTextMeanSeconds": 4.54278949,
+      "manualCompaction": {
+        "count": 1,
+        "seconds": 28.838239700000006,
+        "usd": null,
+        "usageReported": false
+      },
+      "automaticCompactions": 0,
+      "quality": {
+        "passed": 61,
+        "total": 63,
+        "perfectTurns": 8
+      },
+      "originalsVerified": true,
+      "turns": [
+        {
+          "id": "t1",
+          "replySeconds": 4.053755700000009,
+          "firstTextSeconds": 3.2183447000000016,
+          "mainUSD": 0.2924204,
+          "correctFields": 7,
+          "totalFields": 7
+        },
+        {
+          "id": "t2",
+          "replySeconds": 2.312881999999998,
+          "firstTextSeconds": 1.9197035999999934,
+          "mainUSD": 0.0300364,
+          "correctFields": 5,
+          "totalFields": 5
+        },
+        {
+          "id": "t3",
+          "replySeconds": 2.8004587999999933,
+          "firstTextSeconds": 2.1368984999999956,
+          "mainUSD": 0.030738400000000003,
+          "correctFields": 6,
+          "totalFields": 6
+        },
+        {
+          "id": "t4",
+          "replySeconds": 13.564482500000013,
+          "firstTextSeconds": 13.448135599999993,
+          "mainUSD": 0.0348516,
+          "correctFields": 3,
+          "totalFields": 3
+        },
+        {
+          "id": "t5",
+          "replySeconds": 2.4798852999999945,
+          "firstTextSeconds": 2.1059103000000032,
+          "mainUSD": 0.0324832,
+          "correctFields": 2,
+          "totalFields": 2
+        },
+        {
+          "id": "t6",
+          "replySeconds": 2.927284399999975,
+          "firstTextSeconds": 2.2944146999999937,
+          "mainUSD": 0.0326508,
+          "correctFields": 6,
+          "totalFields": 6
+        },
+        {
+          "id": "t7",
+          "replySeconds": 10.21137520000001,
+          "firstTextSeconds": 9.807798600000009,
+          "mainUSD": 0.036084,
+          "correctFields": 2,
+          "totalFields": 3
+        },
+        {
+          "id": "t8",
+          "replySeconds": 2.941788899999985,
+          "firstTextSeconds": 1.7551736999999847,
+          "mainUSD": 0.03524719999999999,
+          "correctFields": 5,
+          "totalFields": 5
+        },
+        {
+          "id": "t9",
+          "replySeconds": 3.1446822999999857,
+          "firstTextSeconds": 2.2532344000000157,
+          "mainUSD": 0.0351128,
+          "correctFields": 9,
+          "totalFields": 9
+        },
+        {
+          "id": "t10",
+          "replySeconds": 8.621920700000016,
+          "firstTextSeconds": 6.488280800000008,
+          "mainUSD": 0.2332704,
+          "correctFields": 16,
+          "totalFields": 17
+        }
+      ]
+    },
+    {
+      "name": "sparks",
+      "main": {
+        "usd": 0.2769736,
+        "inferences": 16,
+        "inputTokens": 859158,
+        "cachedInputTokens": 765696,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 1348
+      },
+      "initialIndex": {
+        "usd": 0.020616080000000002,
+        "inferences": 9,
+        "inputTokens": 217966,
+        "cachedInputTokens": 22528,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 1694
+      },
+      "maintenance": {
+        "usd": 0.011786439999999999,
+        "inferences": 10,
+        "inputTokens": 135899,
+        "cachedInputTokens": 25344,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 955
+      },
+      "totalRecorded": {
+        "usd": 0.30937612000000003,
+        "inferences": 35,
+        "inputTokens": 1213023,
+        "cachedInputTokens": 813568,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 3997
+      },
+      "setupSeconds": 62.779397100000004,
+      "indexSeconds": 55.7632143,
+      "replySeconds": 74.9156552,
+      "meanReplySeconds": 7.49156552,
+      "medianReplySeconds": 6.6022635500000035,
+      "firstTextMeanSeconds": 6.599500059999995,
+      "manualCompaction": null,
+      "automaticCompactions": 0,
+      "quality": {
+        "passed": 63,
+        "total": 63,
+        "perfectTurns": 10
+      },
+      "originalsVerified": true,
+      "turns": [
+        {
+          "id": "t1",
+          "replySeconds": 10.825421000000002,
+          "firstTextSeconds": 9.811427099999987,
+          "mainUSD": 0.0489152,
+          "correctFields": 7,
+          "totalFields": 7
+        },
+        {
+          "id": "t2",
+          "replySeconds": 4.6889695999999965,
+          "firstTextSeconds": 4.163472600000008,
+          "mainUSD": 0.016836400000000005,
+          "correctFields": 5,
+          "totalFields": 5
+        },
+        {
+          "id": "t3",
+          "replySeconds": 7.205786900000007,
+          "firstTextSeconds": 6.452883100000006,
+          "mainUSD": 0.0260924,
+          "correctFields": 6,
+          "totalFields": 6
+        },
+        {
+          "id": "t4",
+          "replySeconds": 12.468872300000003,
+          "firstTextSeconds": 11.962297900000005,
+          "mainUSD": 0.0222552,
+          "correctFields": 3,
+          "totalFields": 3
+        },
+        {
+          "id": "t5",
+          "replySeconds": 3.4143657999999997,
+          "firstTextSeconds": 3.016450599999982,
+          "mainUSD": 0.019784799999999998,
+          "correctFields": 2,
+          "totalFields": 2
+        },
+        {
+          "id": "t6",
+          "replySeconds": 3.522495900000009,
+          "firstTextSeconds": 2.876470799999981,
+          "mainUSD": 0.0198232,
+          "correctFields": 6,
+          "totalFields": 6
+        },
+        {
+          "id": "t7",
+          "replySeconds": 10.849196599999996,
+          "firstTextSeconds": 10.281292399999977,
+          "mainUSD": 0.0237784,
+          "correctFields": 3,
+          "totalFields": 3
+        },
+        {
+          "id": "t8",
+          "replySeconds": 11.108852299999999,
+          "firstTextSeconds": 9.791292199999996,
+          "mainUSD": 0.0521304,
+          "correctFields": 5,
+          "totalFields": 5
+        },
+        {
+          "id": "t9",
+          "replySeconds": 4.832954599999997,
+          "firstTextSeconds": 3.994158599999995,
+          "mainUSD": 0.0225588,
+          "correctFields": 9,
+          "totalFields": 9
+        },
+        {
+          "id": "t10",
+          "replySeconds": 5.9987402,
+          "firstTextSeconds": 3.6452553000000187,
+          "mainUSD": 0.024798800000000003,
+          "correctFields": 17,
+          "totalFields": 17
+        }
+      ]
+    }
+  ],
+  "receipts": [
+    {
+      "id": "r01",
+      "arm": "sparks",
+      "phase": "initial-index",
+      "turn": null,
+      "model": "gpt-6-luna",
+      "inputTokens": 23322,
+      "cachedInputTokens": 2816,
+      "cacheWriteInputTokens": 0,
+      "outputTokens": 342,
+      "usd": 0.00224976
+    },
+    {
+      "id": "r02",
+      "arm": "sparks",
+      "phase": "initial-index",
+      "turn": null,
+      "model": "gpt-6-luna",
+      "inputTokens": 25800,
+      "cachedInputTokens": 2816,
+      "cacheWriteInputTokens": 0,
+      "outputTokens": 219,
+      "usd": 0.00243606
+    },
+    {
+      "id": "r03",
+      "arm": "sparks",
+      "phase": "initial-index",
+      "turn": null,
+      "model": "gpt-6-luna",
+      "inputTokens": 25602,
+      "cachedInputTokens": 2816,
+      "cacheWriteInputTokens": 0,
+      "outputTokens": 75,
+      "usd": 0.00234426
+    },
+    {
+      "id": "r04",
+      "arm": "sparks",
+      "phase": "initial-index",
+      "turn": null,
+      "model": "gpt-6-luna",
+      "inputTokens": 25559,
+      "cachedInputTokens": 2816,
+      "cacheWriteInputTokens": 0,
+      "outputTokens": 133,
+      "usd": 0.00236896
+    },
+    {
+      "id": "r05",
+      "arm": "sparks",
+      "phase": "initial-index",
+      "turn": null,
+      "model": "gpt-6-luna",
+      "inputTokens": 27283,
+      "cachedInputTokens": 2816,
+      "cacheWriteInputTokens": 0,
+      "outputTokens": 320,
+      "usd": 0.00263486
+    },
+    {
+      "id": "r06",
+      "arm": "sparks",
+      "phase": "initial-index",
+      "turn": null,
+      "model": "gpt-6-luna",
+      "inputTokens": 26968,
+      "cachedInputTokens": 2816,
+      "cacheWriteInputTokens": 0,
+      "outputTokens": 185,
+      "usd": 0.00253586
+    },
+    {
+      "id": "r07",
+      "arm": "sparks",
+      "phase": "initial-index",
+      "turn": null,
+      "model": "gpt-6-luna",
+      "inputTokens": 26047,
+      "cachedInputTokens": 2816,
+      "cacheWriteInputTokens": 0,
+      "outputTokens": 75,
+      "usd": 0.00238876
+    },
+    {
+      "id": "r08",
+      "arm": "sparks",
+      "phase": "initial-index",
+      "turn": null,
+      "model": "gpt-6-luna",
+      "inputTokens": 26895,
+      "cachedInputTokens": 0,
+      "cacheWriteInputTokens": 0,
+      "outputTokens": 315,
+      "usd": 0.002847
+    },
+    {
+      "id": "r09",
+      "arm": "sparks",
+      "phase": "initial-index",
+      "turn": null,
+      "model": "gpt-6-luna",
+      "inputTokens": 10490,
+      "cachedInputTokens": 2816,
+      "cacheWriteInputTokens": 0,
+      "outputTokens": 30,
+      "usd": 0.00081056
+    },
+    {
+      "id": "r10",
+      "arm": "codex",
+      "phase": "reply",
+      "turn": "t1",
+      "model": "gpt-6.1-sol",
+      "inputTokens": 153576,
+      "cachedInputTokens": 8064,
+      "cacheWriteInputTokens": 0,
+      "outputTokens": 59,
+      "usd": 0.2924204
+    },
+    {
+      "id": "r11",
+      "arm": "sparks",
+      "phase": "maintenance",
+      "turn": "t1",
+      "model": "gpt-6-luna",
+      "inputTokens": 13111,
+      "cachedInputTokens": 2816,
+      "cacheWriteInputTokens": 0,
+      "outputTokens": 29,
+      "usd": 0.00107216
+    },
+    {
+      "id": "r12",
+      "arm": "sparks",
+      "phase": "reply",
+      "turn": "t1",
+      "model": "gpt-6.1-sol",
+      "inputTokens": 16917,
+      "cachedInputTokens": 0,
+      "cacheWriteInputTokens": 0,
+      "outputTokens": 40,
+      "usd": 0.034234
+    },
+    {
+      "id": "r13",
+      "arm": "sparks",
+      "phase": "reply",
+      "turn": "t1",
+      "model": "gpt-6.1-sol",
+      "inputTokens": 20367,
+      "cachedInputTokens": 16768,
+      "cacheWriteInputTokens": 0,
+      "outputTokens": 31,
+      "usd": 0.0091848
+    },
+    {
+      "id": "r14",
+      "arm": "sparks",
+      "phase": "reply",
+      "turn": "t1",
+      "model": "gpt-6.1-sol",
+      "inputTokens": 21666,
+      "cachedInputTokens": 20224,
+      "cacheWriteInputTokens": 0,
+      "outputTokens": 59,
+      "usd": 0.0054964
+    },
+    {
+      "id": "r15",
+      "arm": "sparks",
+      "phase": "reply",
+      "turn": "t2",
+      "model": "gpt-6.1-sol",
+      "inputTokens": 28697,
+      "cachedInputTokens": 21504,
+      "cacheWriteInputTokens": 0,
+      "outputTokens": 30,
+      "usd": 0.0168364
+    },
+    {
+      "id": "r16",
+      "arm": "sparks",
+      "phase": "maintenance",
+      "turn": "t2",
+      "model": "gpt-6-luna",
+      "inputTokens": 13083,
+      "cachedInputTokens": 2816,
+      "cacheWriteInputTokens": 0,
+      "outputTokens": 183,
+      "usd": 0.00114636
+    },
+    {
+      "id": "r17",
+      "arm": "codex",
+      "phase": "reply",
+      "turn": "t2",
+      "model": "gpt-6.1-sol",
+      "inputTokens": 160550,
+      "cachedInputTokens": 153344,
+      "cacheWriteInputTokens": 0,
+      "outputTokens": 29,
+      "usd": 0.0300364
+    },
+    {
+      "id": "r18",
+      "arm": "codex",
+      "phase": "reply",
+      "turn": "t3",
+      "model": "gpt-6.1-sol",
+      "inputTokens": 167519,
+      "cachedInputTokens": 160384,
+      "cacheWriteInputTokens": 0,
+      "outputTokens": 43,
+      "usd": 0.0307384
+    },
+    {
+      "id": "r19",
+      "arm": "sparks",
+      "phase": "maintenance",
+      "turn": "t3",
+      "model": "gpt-6-luna",
+      "inputTokens": 13534,
+      "cachedInputTokens": 2816,
+      "cacheWriteInputTokens": 0,
+      "outputTokens": 29,
+      "usd": 0.00111446
+    },
+    {
+      "id": "r20",
+      "arm": "sparks",
+      "phase": "reply",
+      "turn": "t3",
+      "model": "gpt-6.1-sol",
+      "inputTokens": 36013,
+      "cachedInputTokens": 28544,
+      "cacheWriteInputTokens": 0,
+      "outputTokens": 27,
+      "usd": 0.0180624
+    },
+    {
+      "id": "r21",
+      "arm": "sparks",
+      "phase": "reply",
+      "turn": "t3",
+      "model": "gpt-6.1-sol",
+      "inputTokens": 37848,
+      "cachedInputTokens": 35840,
+      "cacheWriteInputTokens": 0,
+      "outputTokens": 43,
+      "usd": 0.00803
+    },
+    {
+      "id": "r22",
+      "arm": "sparks",
+      "phase": "maintenance",
+      "turn": "t4",
+      "model": "gpt-6-luna",
+      "inputTokens": 13799,
+      "cachedInputTokens": 2816,
+      "cacheWriteInputTokens": 0,
+      "outputTokens": 29,
+      "usd": 0.00114096
+    },
+    {
+      "id": "r23",
+      "arm": "sparks",
+      "phase": "reply",
+      "turn": "t4",
+      "model": "gpt-6.1-sol",
+      "inputTokens": 45123,
+      "cachedInputTokens": 37632,
+      "cacheWriteInputTokens": 0,
+      "outputTokens": 351,
+      "usd": 0.0222552
+    },
+    {
+      "id": "r24",
+      "arm": "codex",
+      "phase": "reply",
+      "turn": "t4",
+      "model": "gpt-6.1-sol",
+      "inputTokens": 174737,
+      "cachedInputTokens": 167296,
+      "cacheWriteInputTokens": 0,
+      "outputTokens": 324,
+      "usd": 0.0348516
+    },
+    {
+      "id": "r25",
+      "arm": "codex",
+      "phase": "reply",
+      "turn": "t5",
+      "model": "gpt-6.1-sol",
+      "inputTokens": 182004,
+      "cachedInputTokens": 174592,
+      "cacheWriteInputTokens": 0,
+      "outputTokens": 20,
+      "usd": 0.0324832
+    },
+    {
+      "id": "r26",
+      "arm": "sparks",
+      "phase": "reply",
+      "turn": "t5",
+      "model": "gpt-6.1-sol",
+      "inputTokens": 52474,
+      "cachedInputTokens": 44928,
+      "cacheWriteInputTokens": 0,
+      "outputTokens": 20,
+      "usd": 0.0197848
+    },
+    {
+      "id": "r27",
+      "arm": "sparks",
+      "phase": "maintenance",
+      "turn": "t5",
+      "model": "gpt-6-luna",
+      "inputTokens": 13573,
+      "cachedInputTokens": 2816,
+      "cacheWriteInputTokens": 0,
+      "outputTokens": 29,
+      "usd": 0.00111836
+    },
+    {
+      "id": "r28",
+      "arm": "sparks",
+      "phase": "reply",
+      "turn": "t6",
+      "model": "gpt-6.1-sol",
+      "inputTokens": 59476,
+      "cachedInputTokens": 52352,
+      "cacheWriteInputTokens": 0,
+      "outputTokens": 34,
+      "usd": 0.0198232
+    },
+    {
+      "id": "r29",
+      "arm": "codex",
+      "phase": "reply",
+      "turn": "t6",
+      "model": "gpt-6.1-sol",
+      "inputTokens": 188949,
+      "cachedInputTokens": 181888,
+      "cacheWriteInputTokens": 0,
+      "outputTokens": 34,
+      "usd": 0.0326508
+    },
+    {
+      "id": "r30",
+      "arm": "sparks",
+      "phase": "maintenance",
+      "turn": "t6",
+      "model": "gpt-6-luna",
+      "inputTokens": 13537,
+      "cachedInputTokens": 2816,
+      "cacheWriteInputTokens": 0,
+      "outputTokens": 247,
+      "usd": 0.00122376
+    },
+    {
+      "id": "r31",
+      "arm": "codex",
+      "phase": "reply",
+      "turn": "t7",
+      "model": "gpt-6.1-sol",
+      "inputTokens": 195907,
+      "cachedInputTokens": 188800,
+      "cacheWriteInputTokens": 0,
+      "outputTokens": 299,
+      "usd": 0.036084
+    },
+    {
+      "id": "r32",
+      "arm": "sparks",
+      "phase": "maintenance",
+      "turn": "t7",
+      "model": "gpt-6-luna",
+      "inputTokens": 13839,
+      "cachedInputTokens": 2816,
+      "cacheWriteInputTokens": 0,
+      "outputTokens": 29,
+      "usd": 0.00114496
+    },
+    {
+      "id": "r33",
+      "arm": "sparks",
+      "phase": "reply",
+      "turn": "t7",
+      "model": "gpt-6.1-sol",
+      "inputTokens": 66630,
+      "cachedInputTokens": 59264,
+      "cacheWriteInputTokens": 0,
+      "outputTokens": 312,
+      "usd": 0.0237784
+    },
+    {
+      "id": "r34",
+      "arm": "sparks",
+      "phase": "maintenance",
+      "turn": "t8",
+      "model": "gpt-6-luna",
+      "inputTokens": 13851,
+      "cachedInputTokens": 0,
+      "cacheWriteInputTokens": 0,
+      "outputTokens": 29,
+      "usd": 0.0013996
+    },
+    {
+      "id": "r35",
+      "arm": "sparks",
+      "phase": "reply",
+      "turn": "t8",
+      "model": "gpt-6.1-sol",
+      "inputTokens": 73938,
+      "cachedInputTokens": 66432,
+      "cacheWriteInputTokens": 0,
+      "outputTokens": 50,
+      "usd": 0.0221552
+    },
+    {
+      "id": "r36",
+      "arm": "sparks",
+      "phase": "reply",
+      "turn": "t8",
+      "model": "gpt-6.1-sol",
+      "inputTokens": 74029,
+      "cachedInputTokens": 73728,
+      "cacheWriteInputTokens": 0,
+      "outputTokens": 43,
+      "usd": 0.0084048
+    },
+    {
+      "id": "r37",
+      "arm": "sparks",
+      "phase": "reply",
+      "turn": "t8",
+      "model": "gpt-6.1-sol",
+      "inputTokens": 75219,
+      "cachedInputTokens": 73856,
+      "cacheWriteInputTokens": 0,
+      "outputTokens": 31,
+      "usd": 0.0104216
+    },
+    {
+      "id": "r38",
+      "arm": "sparks",
+      "phase": "reply",
+      "turn": "t8",
+      "model": "gpt-6.1-sol",
+      "inputTokens": 76427,
+      "cachedInputTokens": 75008,
+      "cacheWriteInputTokens": 0,
+      "outputTokens": 81,
+      "usd": 0.0111488
+    },
+    {
+      "id": "r39",
+      "arm": "codex",
+      "phase": "reply",
+      "turn": "t8",
+      "model": "gpt-6.1-sol",
+      "inputTokens": 203145,
+      "cachedInputTokens": 195712,
+      "cacheWriteInputTokens": 0,
+      "outputTokens": 81,
+      "usd": 0.0352472
+    },
+    {
+      "id": "r40",
+      "arm": "codex",
+      "phase": "reply",
+      "turn": "t9",
+      "model": "gpt-6.1-sol",
+      "inputTokens": 210169,
+      "cachedInputTokens": 203008,
+      "cacheWriteInputTokens": 0,
+      "outputTokens": 49,
+      "usd": 0.0351128
+    },
+    {
+      "id": "r41",
+      "arm": "sparks",
+      "phase": "reply",
+      "turn": "t9",
+      "model": "gpt-6.1-sol",
+      "inputTokens": 83508,
+      "cachedInputTokens": 76288,
+      "cacheWriteInputTokens": 0,
+      "outputTokens": 49,
+      "usd": 0.0225588
+    },
+    {
+      "id": "r42",
+      "arm": "sparks",
+      "phase": "maintenance",
+      "turn": "t9",
+      "model": "gpt-6-luna",
+      "inputTokens": 13860,
+      "cachedInputTokens": 2816,
+      "cacheWriteInputTokens": 0,
+      "outputTokens": 322,
+      "usd": 0.00129356
+    },
+    {
+      "id": "r43",
+      "arm": "sparks",
+      "phase": "reply",
+      "turn": "t10",
+      "model": "gpt-6.1-sol",
+      "inputTokens": 90826,
+      "cachedInputTokens": 83328,
+      "cacheWriteInputTokens": 0,
+      "outputTokens": 147,
+      "usd": 0.0247988
+    },
+    {
+      "id": "r44",
+      "arm": "sparks",
+      "phase": "maintenance",
+      "turn": "t10",
+      "model": "gpt-6-luna",
+      "inputTokens": 13712,
+      "cachedInputTokens": 2816,
+      "cacheWriteInputTokens": 0,
+      "outputTokens": 29,
+      "usd": 0.00113226
+    },
+    {
+      "id": "r45",
+      "arm": "codex",
+      "phase": "reply",
+      "turn": "t10",
+      "model": "gpt-6.1-sol",
+      "inputTokens": 123136,
+      "cachedInputTokens": 8064,
+      "cacheWriteInputTokens": 0,
+      "outputTokens": 232,
+      "usd": 0.2332704
+    }
+  ],
+  "recordedSavingsPercent": 60.98146135832325,
+  "compactionPriceStatus": "Unreported; no zero-cost assumption",
+  "qualityMethod": "Written field oracle, checked separately from replies; all 1024 candidate subsets enumerated for the optimization task. Single run, not an independent external evaluation."
+}

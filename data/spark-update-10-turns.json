@@ -1,0 +1,210 @@
+{
+  "title": "Latest paired Spark update and separately identified Codex reference",
+  "date": "2026-10-10",
+  "historyMessages": 32,
+  "requestsPerArm": 10,
+  "scope": "Previous and updated Spark tested with fresh independent cold indexes, a newly salted synthetic corpus, matched requests and alternating order. Codex is a preceding matched-workload reference with a different corpus salt, not a concurrent rerun.",
+  "originalsPreserved": true,
+  "arithmeticVerified": true,
+  "independentReplay": false,
+  "sourceComparisonSHA256": "3df5d367f9a6ba36368c70a5dc1b5811c5a289e8f041332cef53264bf8203183",
+  "codexReferenceSHA256": "f70fd93d5670d4f698b418e3ff46939caea5ee5d4490ff657b5acd93d5589887",
+  "ratesPerMillion": {
+    "primary": {
+      "fresh": 2,
+      "cached": 0.1,
+      "write": 2.5,
+      "output": 10
+    },
+    "indexingHelper": {
+      "fresh": 0.1,
+      "cached": 0.01,
+      "write": 0.125,
+      "output": 0.5
+    }
+  },
+  "arms": {
+    "previousSpark": {
+      "turns": 10,
+      "main": {
+        "inferences": 15,
+        "lowerUSD": 0.24989760000000003,
+        "upperUSD": 0.24989760000000003,
+        "inputTokens": 761919,
+        "cachedInputTokens": 678016,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 1429
+      },
+      "initialIndex": {
+        "inferences": 9,
+        "lowerUSD": 0.02112824,
+        "upperUSD": 0.02112824,
+        "inputTokens": 224247,
+        "cachedInputTokens": 25344,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 1969
+      },
+      "incrementalIndex": {
+        "inferences": 12,
+        "lowerUSD": 0.013221460000000003,
+        "upperUSD": 0.013221460000000003,
+        "inputTokens": 161919,
+        "cachedInputTokens": 41216,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 1478
+      },
+      "totalRecorded": {
+        "inferences": 36,
+        "lowerUSD": 0.28424730000000004,
+        "upperUSD": 0.28424730000000004,
+        "inputTokens": 1148085,
+        "cachedInputTokens": 744576,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 4876
+      },
+      "totalCostKnown": true,
+      "setupSeconds": 59.39829980000001,
+      "indexSeconds": 58.13739250000001,
+      "replySeconds": 90.90079699999994,
+      "meanReplySeconds": 9.090079699999993,
+      "medianReplySeconds": 8.54892849999998,
+      "firstTextMeanSeconds": 8.187367449999995,
+      "compactionSeconds": 0,
+      "nativeCompactions": 0,
+      "manualCompactions": 0,
+      "finalDrainSeconds": 0.021408700000029056,
+      "shutdownSeconds": 0.5788560999999754,
+      "lifecycleMeasuredSeconds": 151.01950899999994,
+      "maintenanceSeconds": 0.1201474000000162,
+      "quality": {
+        "passed": 63,
+        "total": 63,
+        "perfectTurns": 10
+      },
+      "originalsVerified": true
+    },
+    "updatedSpark": {
+      "turns": 10,
+      "main": {
+        "inferences": 14,
+        "lowerUSD": 0.2512896,
+        "upperUSD": 0.2512896,
+        "inputTokens": 670387,
+        "cachedInputTokens": 581376,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 1513
+      },
+      "initialIndex": {
+        "inferences": 9,
+        "lowerUSD": 0.021153000000000005,
+        "upperUSD": 0.021153000000000005,
+        "inputTokens": 244392,
+        "cachedInputTokens": 46080,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 1722
+      },
+      "incrementalIndex": {
+        "inferences": 11,
+        "lowerUSD": 0.012657600000000001,
+        "upperUSD": 0.012657600000000001,
+        "inputTokens": 146025,
+        "cachedInputTokens": 28160,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 1179
+      },
+      "totalRecorded": {
+        "inferences": 34,
+        "lowerUSD": 0.2851002000000001,
+        "upperUSD": 0.2851002000000001,
+        "inputTokens": 1060804,
+        "cachedInputTokens": 655616,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 4414
+      },
+      "totalCostKnown": true,
+      "setupSeconds": 49.1966804,
+      "indexSeconds": 45.7594323,
+      "replySeconds": 81.96622380000005,
+      "meanReplySeconds": 8.196622380000004,
+      "medianReplySeconds": 6.582054050000021,
+      "firstTextMeanSeconds": 7.259897050000001,
+      "compactionSeconds": 0,
+      "nativeCompactions": 0,
+      "manualCompactions": 0,
+      "finalDrainSeconds": 5.309237699999998,
+      "shutdownSeconds": 0.5589443000000319,
+      "lifecycleMeasuredSeconds": 137.1467126000001,
+      "maintenanceSeconds": 0.11562640000000829,
+      "quality": {
+        "passed": 63,
+        "total": 63,
+        "perfectTurns": 10
+      },
+      "originalsVerified": true
+    },
+    "codexEarlierReference": {
+      "turns": 10,
+      "main": {
+        "inferences": 10,
+        "lowerUSD": 0.8100080000000001,
+        "upperUSD": 0.8100080000000001,
+        "inputTokens": 1761412,
+        "cachedInputTokens": 1434240,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 1224
+      },
+      "initialIndex": {
+        "inferences": 0,
+        "lowerUSD": 0,
+        "upperUSD": 0
+      },
+      "incrementalIndex": {
+        "inferences": 0,
+        "lowerUSD": 0,
+        "upperUSD": 0
+      },
+      "totalRecorded": {
+        "inferences": 10,
+        "lowerUSD": 0.8100080000000001,
+        "upperUSD": 0.8100080000000001,
+        "inputTokens": 1761412,
+        "cachedInputTokens": 1434240,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 1224
+      },
+      "totalCostKnown": false,
+      "setupSeconds": 7.6065838,
+      "indexSeconds": 0,
+      "replySeconds": 59.186569799999916,
+      "meanReplySeconds": 5.918656979999992,
+      "medianReplySeconds": 4.431890249999983,
+      "firstTextMeanSeconds": 5.02810335,
+      "compactionSeconds": 32.113114799999984,
+      "nativeCompactions": 0,
+      "manualCompactions": 1,
+      "finalDrainSeconds": 0,
+      "shutdownSeconds": 0.32933869999996385,
+      "lifecycleMeasuredSeconds": 99.23560709999987,
+      "maintenanceSeconds": 0,
+      "quality": {
+        "passed": 63,
+        "total": 63,
+        "perfectTurns": 10
+      },
+      "originalsVerified": true
+    }
+  },
+  "calculated": {
+    "meanReplyImprovementPercent": 9.828927242519004,
+    "recordedCostChangePercent": 0.3000556205811078,
+    "lifecycleImprovementPercent": 9.186095552727469,
+    "recordedSavingAgainstEarlierCodexPercent": 64.80279207118942,
+    "replyTimeIncreaseAgainstEarlierCodexPercent": 38.487876687187494
+  },
+  "limitations": [
+    "Synthetic recall and reasoning workload, not a desktop rendering or broad coding benchmark.",
+    "Codex manual compaction usage was unreported and is excluded from its recorded total.",
+    "The two missed checks in the earlier highlighted comparison are a different trial; this Codex reference passed all 63 checks.",
+    "No automatic compaction occurred in these runs. Future working-context rebuilds remain possible."
+  ]
+}

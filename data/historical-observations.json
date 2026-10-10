@@ -1,0 +1,79 @@
+{
+  "source": "Selected aggregates from earlier published records; no source text or application files",
+  "observations": [
+    {
+      "workload": "Earlier 50-prompt memory comparison",
+      "comparison": "Historical full-history comparison, existing index; different main-model configuration from the later ten-turn run",
+      "sparkOngoingUSD": 1.1794060400000006,
+      "controlUSD": 7.281695999999999,
+      "historicalInitialIndexUSD": 0.01595118,
+      "historicalInitialIndexSeconds": 112.9757214,
+      "sparkSequenceSeconds": 161.75198569999998,
+      "controlSequenceSeconds": 184.0908667999999,
+      "reportedSavingPercent": 83.80314091662162,
+      "reportedTimeReductionPercent": 12.134703632130394
+    },
+    {
+      "workload": "1,166 originals, ten continuing recall prompts",
+      "model": "gpt-6.1-sol",
+      "effort": "medium",
+      "comparison": "Full-history context and Spark selective context on same custom Codex engine; existing index",
+      "sparkOngoingUSD": 0.1248695,
+      "controlUSD": 0.5749824,
+      "historicalInitialIndexUSD": 0.1345994,
+      "historicalInitialIndexSeconds": 440.2637,
+      "sparkReplySeconds": 62.4927368,
+      "controlReplySeconds": 59.8096,
+      "requiredAnswersPerArm": 10,
+      "grading": "Assistant review against written criteria"
+    },
+    {
+      "workload": "Later ten-question recall comparison",
+      "model": "gpt-6.1-sol",
+      "effort": "high",
+      "comparison": "Codex official engine with full history; existing Spark index",
+      "sparkOngoingUSD": 0.1495795,
+      "controlUSD": 0.59386,
+      "historicalInitialIndexUSD": 0.1345994,
+      "historicalInitialIndexSeconds": 440.2637,
+      "sparkSequenceSeconds": 80.85,
+      "controlSequenceSeconds": 74.33,
+      "timePrecision": "Rounded from prior published table",
+      "separateCompactionArm": {
+        "freshInputTokens": 198812,
+        "cachedInputTokens": 0,
+        "outputTokens": 1824,
+        "compactionUSD": 0.415864,
+        "compactionSeconds": 55.03,
+        "compactionAndAnswersUSD": 0.6533948,
+        "compactionAndAnswersSeconds": 119.29
+      }
+    },
+    {
+      "workload": "Five-question recall diagnostic",
+      "model": "gpt-6.1-sol",
+      "effort": "high",
+      "comparison": "Previously used questions, existing index",
+      "sparkOngoingUSD": 0.10314614,
+      "controlUSD": 0.4871596,
+      "historicalInitialIndexUSD": 0.1345994,
+      "historicalInitialIndexSeconds": 440.2637,
+      "sparkActiveSeconds": 75.24,
+      "controlActiveSeconds": 55.13,
+      "timePrecision": "Rounded from prior published table"
+    },
+    {
+      "workload": "Build a site, then redesign it",
+      "model": "gpt-6-astra",
+      "effort": "high",
+      "comparison": "Shared requests; different project histories, tool routes and output features; no independent equal-quality grading",
+      "sparkNewWorkUSD": 3.34404172,
+      "controlUSD": 5.037892,
+      "sparkEngineTurnSeconds": 635.169,
+      "controlEngineTurnSeconds": 868.646,
+      "initialSetupPriceStatus": "Existing project setup not newly measured",
+      "newHelpersIncluded": true,
+      "nativeCompactionsPerArm": 0
+    }
+  ]
+}
