@@ -6,6 +6,8 @@
 
 I work on long projects in the same chat for weeks. Along the way I change my mind, the assistant makes assumptions, and the work moves on. I built Spark so the assistant always knows the difference between what I said, what it understood, what it actually did, and what I changed later. It can check any of that against my exact words, and it doesn't have to re-read the whole conversation on every message to do it.
 
+This repo has the method, the measurements with every token receipt, and a small example you can run. The Spark app itself is private for now.
+
 ## A and B
 
 - **A is what I actually said.** Every original message is stored once, with a stable address like `/c/demo/50`. Nothing rewrites it.
@@ -94,4 +96,4 @@ B is a kind of summary too, but every item in it links to the exact message it c
 - **A full working day:** time from opening the project to finished work, including compaction waits and Spark's own rebuilds.
 [The full test plan](docs/testing.md)
 
-Spark is a personal prototype, and these are early results from one person's work. So far it has made my long projects cheaper and easier to keep straight. The Spark app is private for now. If you want to try it or test the method on your own work, [open an issue](https://github.com/abdulrhmansayed/sparks-context-bridge/issues).
+Spark is a personal prototype, and these are early results from one person's work. So far it has made my long projects cheaper and easier to keep straight. If you want to try it or test the method on your own work, [open an issue](https://github.com/forasm/sparks-context-bridge/issues).

@@ -90,4 +90,4 @@ The method has to finish the same work for less recurring context while keeping 
 
 I also want to understand speed: when less input helps, when extra lookups cost more time than they save, and whether Spark's rebuilds interrupt work less often than Codex's compaction.
 
-If you have a workload or criticism that would test these points, [open an issue](https://github.com/abdulrhmansayed/sparks-context-bridge/issues). Include the comparison conditions and the exact claim you want to examine. Please avoid posting credentials or private conversations.
+If you have a workload or criticism that would test these points, [open an issue](https://github.com/forasm/sparks-context-bridge/issues). Include the comparison conditions and the exact claim you want to examine. Please avoid posting credentials or private conversations.

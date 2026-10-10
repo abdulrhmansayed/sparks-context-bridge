@@ -40,4 +40,4 @@ The archive stays on my PC, but the context selected for each request is sent to
 
 I'm sharing the method and the results now, and I'm still deciding how to share the app itself. This repository has no app code, installer, engine binary, private chats or account details.
 
-If you'd like to review the design or try Spark when it's available, [open an issue](https://github.com/abdulrhmansayed/sparks-context-bridge/issues) and tell me what kind of project you'd use it for. [The test plan](testing.md) lists the comparisons I'd most like to see.
+If you'd like to review the design or try Spark when it's available, [open an issue](https://github.com/forasm/sparks-context-bridge/issues) and tell me what kind of project you'd use it for. [The test plan](testing.md) lists the comparisons I'd most like to see.
