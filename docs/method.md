@@ -47,13 +47,22 @@ B holds the project goal, the active task, the rules, the decisions and correcti
 
 Interpretation is useful, and it can be wrong: a paraphrase can drop a condition, a project name can be ambiguous, a suggestion can look like an instruction. Keeping the originals means every interpretation can be checked and fixed. The memory tools can read originals and update B, but they can't grant themselves permission by rewriting it.
 
+### Who writes what
+
+Two kinds of interpretation sit on top of A, and they're written by different models:
+
+- **The index, written by Luna.** For each message Luna records claims: a topic or key, the interpreted value, its status, the exact supporting quote, the source ID, and a link to whatever the claim replaces.
+- **The B notes, written by the main agent** through a dedicated tool as it works: its working understanding, notes on outcomes and evidence, open questions, and exact source references.
+
+When the agent reads B, Spark shows the notes together with the most recent indexed claims, so the two can look like one thing. Both are fallible interpretations, and my original messages stay the authority.
+
 ### Keeping B small as the project grows
 
 B is a working view, not a second transcript. By default it carries the current goal, the active rules, the accepted decisions, the open questions, recent verified results and the next steps. Finished episodes and replaced interpretations move out of the default view but stay stored and linked to their originals, so the agent can reopen them by topic, by decision chain, by date or by search.
 
-### When the helper misses something
+### When an interpretation misses something
 
-The helper model that builds B can miss a rule. Source links let you check what B contains, but they can't show what B left out. So the archive should also record which messages were interpreted, which were skipped or failed, and which need another pass. The agent can always reach originals outside B through search and chronological browsing, which matters most for a new instruction that hasn't been interpreted yet. The [hidden-rule test](testing.md#hidden-rules-without-reminders) checks whether earlier rules actually shape later work.
+Luna can miss a rule when it indexes a message, and the agent can leave something out of its B notes. Source links let you check what B contains, but they can't show what B left out. So the archive should also record which messages were interpreted, which were skipped or failed, and which need another pass. The agent can always reach originals outside B through search and chronological browsing, which matters most for a new instruction that hasn't been interpreted yet. The [hidden-rule test](testing.md#hidden-rules-without-reminders) checks whether earlier rules actually shape later work.
 
 ## 5. Corrections and proposals
 
@@ -93,7 +102,9 @@ The source directory finds originals by address and by date. Topic and decision 
 
 The map connects projects to chats, chats to topics, and topics to decisions, corrections, results and source addresses. It shows both interpreted messages and messages whose interpretation is incomplete or uncertain.
 
-Each route has its job. An address gives a direct lookup. Search finds candidates when you know the words. Topic links surface related evidence when I refer to an earlier idea indirectly. The prototype combines the linked map, targeted selection and SQLite full-text search, with no vector database. A topic label is never the only way to reach an original, so one interpretation mistake can't hide intact evidence.
+Each route has its job. An address gives a direct lookup: if the agent knows the chat and message ID, it fetches the exact original, with no guessing or ranking. Search finds candidates when you know the words. It's SQLite full-text keyword search ranked by BM25, with no embeddings or vector database, and it runs over the indexed text of the originals, normally inside the current chat; a project search can include the project's other chats. Topic links surface related evidence when I refer to an earlier idea indirectly, and the agent can also open the messages around a source to see its context.
+
+A keyword search that finds nothing doesn't prove something never happened, so the agent can still browse topics, fetch originals by ID and read neighboring messages. A topic label is never the only way to reach an original, so one interpretation mistake can't hide intact evidence.
 
 ## 8. Import once, then keep it updated
 

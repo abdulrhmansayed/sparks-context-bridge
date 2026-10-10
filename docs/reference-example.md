@@ -136,9 +136,9 @@ print(json.dumps({"date_picker_context": context, "appearance_context": appearan
 
 ## How Spark goes further
 
-To stay small, this example includes project-wide rules in every task and selects other topics by name. In Spark, the Luna helper model writes B from the real conversation and the map finds related topics, so nobody writes B records by hand.
+To stay small, this example includes project-wide rules in every task and selects other topics by name. In Spark, Luna indexes the real conversation, the main agent writes its B notes as it works, and the map finds related topics, so nobody writes B records by hand.
 
-The approval check here looks at who said something: an assistant message can never approve. In Spark, the helper also has to understand what was said, since "maybe" and "I approve" mean different things.
+The approval check here looks at who said something: an assistant message can never approve. In Spark, the models also have to understand what was said, since "maybe" and "I approve" mean different things.
 
 You can revise B here by saving a new item under the same key, and A stays untouched. Spark also links corrections to the decisions they replace, fits each request into a budget, and tracks what each model session has already seen.
 
