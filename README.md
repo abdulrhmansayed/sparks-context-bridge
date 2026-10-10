@@ -33,7 +33,7 @@ Take a made-up example. At message 50 I write "Never use Library X in this proje
 3. If it needs more, it opens originals by address, by topic, by search, or in order.
 4. New messages and results go into A, and B is updated. Unchanged history is never indexed again.
 
-When the agent's working context gets too big, Spark is designed to rebuild it from B and the exact sources instead of a lossy summary. The visible chat just continues. I never have to open a new chat and explain the project again.
+When the agent's working context reaches 96K tokens, Spark starts a fresh one, rebuilt from B and the exact sources instead of a lossy summary. The visible chat just continues. I never have to open a new chat and explain the project again.
 
 [How the method works](docs/method.md) · [Run a small fictional example](docs/reference-example.md)
 
