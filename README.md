@@ -26,7 +26,7 @@ Two examples, neither of which depends on what tokens cost:
 
 ## What happens when I send a message
 
-Take a made-up example. At message 50 I write "Never use Library X in this project." About 130 messages later I ask "Add a date picker" and don't mention the rule. B holds it as an active project rule, so it goes into the request along with a link to message 50, and the agent can open my exact words before it picks a library. I don't have to remember which message it was.
+Take a made-up example. At message 50 I write "Never use Library X in this project." About 130 messages later I ask "Add a date picker" and don't mention the rule. The agent saved it in B as a project rule, so it travels with the working context along with a link to message 50, and the agent can open my exact words before it picks a library. I don't have to remember which message it was.
 
 1. The history is already stored and indexed. A small, cheap helper model (Luna) built the links when the chat was imported, and it updates them as we work.
 2. The main agent receives my new message, the relevant parts of B, selected original messages, and the addresses of everything else.
