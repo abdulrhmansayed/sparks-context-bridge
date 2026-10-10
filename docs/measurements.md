@@ -128,7 +128,7 @@ The bridge keeps the imported history out of the working context. The working th
 | First inference, message 9 | 83,508 tokens | 210,169 tokens |
 | First inference, message 10 | 90,826 tokens | 123,136 tokens, after manual compaction |
 
-From message one to nine, Spark's input grew by about 8.3K tokens per message and Codex's by 7.1K. The test messages were long, and Spark made a few extra retrieval rounds. Spark started about 137K tokens lighter, so it had far more room left. Spark rebuilds its working context at 96K tokens, and this test peaked at 90,826, so it ended just before the first rebuild. Measuring rebuilds and evidence redelivery over a long project is one of the next tests.
+From message one to nine, Spark's input grew by about 8.3K tokens per message and Codex's by 7.1K. The test messages were long, and Spark made a few extra retrieval rounds. Spark started about 137K tokens lighter, so it had far more room left. This test peaked at 90,826 tokens and ended before Spark's first rebuild, which in the current build happens at about 126K. Measuring rebuilds and evidence redelivery over a long project is one of the next tests.
 
 ### Cost and time per message
 

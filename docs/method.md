@@ -119,7 +119,7 @@ The bridge records which source passages reached which model session, so it does
 
 When the model session changes, that record starts fresh for the new session. The archive is unchanged, but the new session may need some evidence again.
 
-Spark continues native model threads, so recent turns accumulate. In the ten-message test, Spark's first request was 16,917 tokens against Codex's 153,576, and by message ten Spark's had grown to 90,826. The bridge keeps the imported history out of the working context. Keeping the working context small over many sessions is the job of the rebuild in section 12, which starts at 96K tokens. The test peaked at 90,826, just under it. ([Spark's working context also grows](measurements.md#sparks-working-context-also-grows))
+Spark continues native model threads, so recent turns accumulate. In the ten-message test, Spark's first request was 16,917 tokens against Codex's 153,576, and by message ten Spark's had grown to 90,826. The bridge keeps the imported history out of the working context. Keeping the working context small over many sessions is the job of the rebuild in section 12. The test peaked at 90,826 tokens and didn't reach a rebuild. ([Spark's working context also grows](measurements.md#sparks-working-context-also-grows))
 
 ## 11. Files, commands and tool results
 
@@ -129,9 +129,11 @@ I think of the tool side as a call center: one route for evidence and operations
 
 ## 12. When the working context fills up
 
-The archive lives outside the model's context window, so the project's history never depends on one rolling summary. When a working session reaches 96K tokens, Spark starts a fresh one, rebuilding the context from the current work state and the addressed evidence. The index stays as it is.
+The archive lives outside the model's context window, so the project's history never depends on one rolling summary. When a working session gets close to its budget, Spark starts a fresh one, rebuilding the context from the current work state and the addressed evidence. The index stays as it is.
 
 The visible chat stays the same chat through a rebuild. Its addresses, decision links and recorded work are all still there. Starting a new internal model session is very different from asking me to open a new chat and explain the project again.
+
+In the current build, the working context has a budget of 150K tokens, capped at 60% of the model's context window. Spark rebuilds before a request would go over it: when the last request's input, plus the new message, plus a 24K safety reserve would pass 150K. With a short new message, that happens at about 126K tokens. The count is a conservative estimate, not exact token counting, and a rebuild never touches the archive.
 
 A rebuild still takes work, and the window is still finite, so a production version needs a clear policy for what stays in the session, what gets reopened, and when to start fresh.
 
