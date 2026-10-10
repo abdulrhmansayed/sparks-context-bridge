@@ -85,7 +85,15 @@ Compaction is what Codex and most coding agents do when a chat gets too long: th
 - It's a pause. In my test, Codex's compaction took 28.8 seconds. In an earlier run, one compaction took 55 seconds and cost $0.42.
 - The next reply starts cold. Right after compaction the cache can't be reused, so Codex's next reply cost $0.23, against Spark's $0.03.
 
-B is a kind of summary too, but every item in it links to the exact message it came from, and Spark rebuilds its working context from B plus those originals. The two approaches can also work together.
+**A Spark rebuild is not a compaction.** When Spark's working context gets close to its budget, it starts a fresh session, and no model is asked to summarize the old one. The new session is put together from what Spark already keeps:
+
+| | Compaction | Spark rebuild |
+|---|---|---|
+| Old messages | Squeezed into a new summary | Kept word for word, still openable by number |
+| Newly written at the limit | A summary of the whole chat | Only bookkeeping: the new session's ID and logs |
+| What the model continues from | The summary | My current message, B, selected exact messages, and up to three recent replies word for word |
+
+B is a kind of summary too, but it's built message by message as we work, every item links to the exact message it came from, and Spark never treats it as evidence. The rebuild carries B over; it doesn't write it. [Rebuild details](docs/method.md#12-when-the-working-context-fills-up)
 
 ## What I'm testing next
 

@@ -135,6 +135,16 @@ The visible chat stays the same chat through a rebuild. Its addresses, decision 
 
 In the current build, the working context has a budget of 150K tokens, capped at 60% of the model's context window. Spark rebuilds before a request would go over it: when the last request's input, plus the new message, plus a 24K safety reserve would pass 150K. With a short new message, that happens at about 126K tokens. The count is a conservative estimate, not exact token counting, and a rebuild never touches the archive.
 
+A rebuild doesn't ask any model to summarize the old session. Spark starts a fresh thread and assembles a new context from what it already keeps:
+
+- the usual instructions, tools and runtime settings
+- my current message, exactly as written
+- selected exact excerpts from the history, the indexed claims and their status, and the checks that require certain sources to be opened
+- navigation IDs, the existing B notes, and relevant excerpts from other chats when they're selected
+- up to three recent assistant replies, word for word. Each must fit in 4KB, and a longer reply is replaced by a pointer to its ID. If adding them would push the packet over 64KB, they're left out.
+
+The B notes and indexed claims are interpretations, so they're summary-like, but the rebuild carries them over instead of writing them, and Spark never treats them as original evidence. The only new things written during a rebuild are bookkeeping: the new thread ID, its generation number, the delivery checkpoint and the logs. Anything the new session doesn't receive, including old tool results, can still be opened by its ID.
+
 A rebuild still takes work, and the window is still finite, so a production version needs a clear policy for what stays in the session, what gets reopened, and when to start fresh.
 
 Compaction is the other common approach. OpenAI's API compaction can return an opaque, encrypted item along with retained context ([documentation](https://developers.openai.com/api/docs/guides/compaction)), so you can't read it the way you'd read a summary. The difference I care about is the explicit route from the current understanding back to exact evidence. The bridge can also work alongside compaction.
