@@ -33,7 +33,7 @@ Take a made-up example. At message 50 I write "Never use Library X in this proje
 3. If it needs more, it opens originals by address, by topic, by search, or in order.
 4. New messages and results go into A, and B is updated. Unchanged history is never indexed again.
 
-When the agent's working context gets close to its budget (about 126K tokens today), Spark starts a fresh one, rebuilt from B and the exact sources instead of a lossy summary. The visible chat just continues. I never have to open a new chat and explain the project again.
+When the agent's working context gets close to its budget, Spark starts a fresh one, rebuilt from B and the exact sources instead of a lossy summary. The visible chat just continues. I never have to open a new chat and explain the project again.
 
 [How the method works](docs/method.md) · [Run a small fictional example](docs/reference-example.md)
 
@@ -91,7 +91,7 @@ Compaction is what Codex and most coding agents do when a chat gets too long: th
 |---|---|---|
 | Old messages | Squeezed into a new summary | Kept word for word, still openable by number |
 | Newly written at the limit | A summary of the whole chat | Only bookkeeping: the new session's ID and logs |
-| What the model continues from | The summary | My current message, B, selected exact messages, and up to three recent replies word for word |
+| What the model continues from | The summary | My current message, B, selected exact messages, and a few recent replies word for word |
 
 B is a kind of summary too, but it's built message by message as we work, every item links to the exact message it came from, and Spark never treats it as evidence. The rebuild carries B over; it doesn't write it. [Rebuild details](docs/method.md#12-when-the-working-context-fills-up)
 

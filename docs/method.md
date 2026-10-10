@@ -35,7 +35,7 @@ The number only locates the message. It says nothing about relevance or size.
 
 Once a message is stored, nothing changes it under that address. A correction is a new message that points back to the old one, never an edit of my earlier words.
 
-Long messages are read in pages. The agent gets an exact range with its address, its position and where the rest continues; a single read normally returns up to 4,000 characters, and a batch can return several smaller originals whole. A page is always marked as a page, so the agent never treats the first part of a message as all of it. A new message over 128,000 bytes is refused with a note asking me to split it, and the chat source is preserved.
+Long messages are read in pages. The agent gets an exact range with its address, its position and where the rest continues, and a page is always marked as a page, so the agent never treats the first part of a message as all of it. A very large new message is refused with a request to split it, and nothing already stored is lost.
 
 Hashes catch accidental changes between what was stored and what was returned.
 
@@ -51,19 +51,17 @@ Interpretation is useful, and it can be wrong: a paraphrase can drop a condition
 
 Two kinds of interpretation sit on top of A, and they're written by different models:
 
-- **The index, written by Luna.** For each message Luna records claims: a topic or key, the interpreted value, its status, the exact supporting quote, the source ID, and links to any earlier claims it replaces. Spark adds the identifiers and provenance.
-- **The B notes, written by the main agent** through a dedicated tool as it works: its working understanding, notes on outcomes and evidence, open questions, and exact source references.
+- **The index, written by Luna.** For each message Luna records claims: a topic or key, the interpreted value, its status, the exact supporting quote, the source ID, and links to any earlier claims it replaces. - **The B notes, written by the main agent** as it works: its working understanding, notes on outcomes and evidence, open questions, and exact source references.
 
-A real indexed claim looks like this (IDs shortened):
+An indexed claim looks roughly like this (fictional example):
 
 ```json
 {
-  "sourceId": "/c/<chat-id>/538",
-  "key": "study_harbor.runtime.limitations_question",
-  "value": "Asks what Spark handles poorly and how very large pasted messages are handled, including paging or limits.",
-  "status": "uncertain",
-  "quote": "What does Spark not handle well yet?",
-  "validity": "current"
+  "source": "/c/demo/50",
+  "key": "dependencies.library_x",
+  "value": "Library X must not be used in this project.",
+  "status": "confirmed",
+  "quote": "Never use Library X in this project."
 }
 ```
 
@@ -76,7 +74,7 @@ Every claim gets one of four statuses:
 | `reported` | something the assistant stated |
 | `uncertain` | Luna couldn't tell |
 
-"Current" means the claim is active, not that it's correct. When Luna isn't sure, the claim stays `uncertain`, and an uncertain claim can never replace a confirmed one. The relevant originals are then sent directly, or marked so the agent has to read them.
+When Luna isn't sure, the claim stays `uncertain`, and an uncertain claim can never replace a confirmed one. The relevant originals are then sent directly, or marked so the agent has to read them.
 
 When the agent reads B, Spark shows the notes together with the most recent indexed claims, so the two can look like one thing. Both are fallible interpretations, and my original messages stay the authority.
 
@@ -97,7 +95,7 @@ B is a working view, not a second transcript. By default it carries the current 
 
 ### When an interpretation misses something
 
-Luna can miss a rule when it indexes a message, and the agent can leave something out of its B notes. Source links let you check what B contains, but they can't show what B left out. So Spark tracks indexing as jobs, with states, failure reasons, a limited number of retries, version stamps, source hashes and receipts. A message being stored and searchable is tracked separately from it being successfully interpreted. The agent can always reach originals outside B through search and chronological browsing, which matters most for a new instruction that hasn't been interpreted yet. The [hidden-rule test](testing.md#hidden-rules-without-reminders) checks whether earlier rules actually shape later work.
+Luna can miss a rule when it indexes a message, and the agent can leave something out of its B notes. Source links let you check what B contains, but they can't show what B left out. So Spark tracks whether each message was interpreted, is still waiting, or failed and needs a retry. A message being stored and searchable is tracked separately from it being successfully interpreted. The agent can always reach originals outside B through search and chronological browsing, which matters most for a new instruction that hasn't been interpreted yet. The [hidden-rule test](testing.md#hidden-rules-without-reminders) checks whether earlier rules actually shape later work.
 
 ## 5. Corrections and proposals
 
@@ -139,7 +137,7 @@ The source directory finds originals by address and by date. Topic and decision 
 
 The map connects projects to chats, chats to topics, and topics to decisions, corrections, results and source addresses. It shows both interpreted messages and messages whose interpretation is incomplete or uncertain.
 
-Each route has its job. An address gives a direct lookup: if the agent knows the chat and message ID, it fetches the exact original, with no guessing or ranking. Search finds candidates when you know the words. It's SQLite FTS5 keyword search with Porter stemming (so "libraries" also finds "library") and Unicode word splitting, ranked by BM25, with exact phrase handling for identifiers. There are no embeddings or vector database, and it doesn't fix typos. It runs over the indexed text of the originals, normally inside the current chat; a project search can include the project's other chats. Topic links surface related evidence when I refer to an earlier idea indirectly, and the agent can also open the messages around a source to see its context.
+Each route has its job. An address gives a direct lookup: if the agent knows the chat and message ID, it fetches the exact original, with no guessing or ranking. Search finds candidates when you know the words. It's local keyword search, with no embeddings or vector database, so it doesn't fix typos. It runs over the indexed text of the originals, normally inside the current chat; a project search can include the project's other chats. Topic links surface related evidence when I refer to an earlier idea indirectly, and the agent can also open the messages around a source to see its context.
 
 A keyword search that finds nothing doesn't prove something never happened, so the agent can still browse topics, fetch originals by ID and read neighboring messages. A topic label is never the only way to reach an original, so one interpretation mistake can't hide intact evidence.
 
@@ -149,25 +147,15 @@ Importing an existing chat does two things: it stores the originals, and it buil
 
 From then on, new messages and results extend the archive and update only the records they affect. A correction updates the current understanding and adds a link to the earlier evidence. Questions that only read history don't need new indexing at all.
 
-New messages from me go into a background queue in order, and a backlog is processed four messages at a time. The agent can answer before Luna has finished: messages that haven't been indexed yet are still available as exact evidence, and Luna holds back its updates while an answer is reading evidence. Assistant replies are archived without extraction, and a few clearly historical questions skip extraction but stay searchable. Background work never gets treated as finished when it isn't.
+New messages are indexed in the background, in order. The agent can answer before Luna has finished, because messages that haven't been indexed yet are still available as exact evidence. Background work never gets treated as finished when it isn't.
 
 ## 9. Building a request
 
-A request contains my new message, the active work state, the relevant parts of B with their sources, selected original messages, recent interactions, and addresses for everything else. The selection is a fixed pipeline in code, not a model rewriting the history:
-
-1. Search the indexed claims using the wording of my new message.
-2. Follow claims with the same key, and their correction and clarification links.
-3. Add relevant unresolved originals and my recent messages.
-4. Pick exact passages from the archive, including keyword hits.
-5. Drop evidence this session has already received.
-6. Refresh any claim whose status has changed.
-7. Add a limited amount of navigation and relevant excerpts from other chats.
-
-The B notes travel as one compact object when a thread starts or when they've been revised, instead of being picked sentence by sentence.
+A request contains my new message, the active work state, the relevant parts of B with their sources, selected original messages, recent interactions, and addresses for everything else. The selection is done by code in fixed steps, not by a model rewriting the history: it finds the claims that match the new message, follows their corrections, adds exact passages from the archive, and skips anything the session already has. The B notes travel as one piece instead of being picked sentence by sentence.
 
 For the autosave example, the map finds the 10-second request and the 30-second correction, B says the current interval is 30 seconds and the implementation is unfinished, and the agent can open both originals before it changes anything. The finished change then becomes evidence for the next task.
 
-The request has budgets: 8,000 bytes for the first selection pass, 22,000 bytes plus the size of my message for the full project packet, 24,000 bytes per page when a required original must be read, and 64,000 bytes as the limit for adding recent replies after a rebuild. When everything relevant doesn't fit, the rest is deferred with a requirement to retrieve it, never turned into a summary. Leaving something out of one request never deletes it from the archive. The budget counts the whole request, including instructions, tools and earlier session turns, not just the evidence.
+The request has size limits. When everything relevant doesn't fit, the rest is left for the agent to retrieve, never turned into a summary. Leaving something out of one request never deletes it from the archive. The budget counts the whole request, including instructions, tools and earlier session turns, not just the evidence.
 
 The agent can open several known sources at once, read an exact range, expand a topic, or search. Each extra round costs time and tokens, which is why Spark is sometimes slower per reply. The goal is enough evidence for the task, available before an answer counts as grounded.
 
@@ -191,7 +179,7 @@ The archive lives outside the model's context window, so the project's history n
 
 The visible chat stays the same chat through a rebuild. Its addresses, decision links and recorded work are all still there. Starting a new internal model session is very different from asking me to open a new chat and explain the project again.
 
-In the current build, the working context has a budget of 150K tokens, capped at 60% of the model's context window. Spark rebuilds before a request would go over it: when the last request's input, plus the new message, plus a 24K safety reserve would pass 150K. With a short new message, that happens at about 126K tokens. The count is a conservative estimate, not exact token counting, and a rebuild never touches the archive.
+The working context has a token budget set well below the model's context window, with a safety reserve. Spark rebuilds before a request would go over it, and a rebuild never touches the archive.
 
 A rebuild doesn't ask any model to summarize the old session. Spark starts a fresh thread and assembles a new context from what it already keeps:
 
@@ -199,11 +187,11 @@ A rebuild doesn't ask any model to summarize the old session. Spark starts a fre
 - my current message, exactly as written
 - selected exact excerpts from the history, the indexed claims and their status, and the checks that require certain sources to be opened
 - navigation IDs, the existing B notes, and relevant excerpts from other chats when they're selected
-- up to three recent assistant replies, word for word. Each must fit in 4KB, and a longer reply is replaced by a pointer to its ID. If adding them would push the packet over 64KB, they're left out.
+- a few recent assistant replies, word for word; a long reply is replaced by a pointer to its ID
 
-The B notes and indexed claims are interpretations, so they're summary-like, but the rebuild carries them over instead of writing them, and Spark never treats them as original evidence. The only new things written during a rebuild are bookkeeping: the new thread ID, its generation number, the delivery checkpoint and the logs. Anything the new session doesn't receive, including old tool results, can still be opened by its ID.
+The B notes and indexed claims are interpretations, so they're summary-like, but the rebuild carries them over instead of writing them, and Spark never treats them as original evidence. The only new things written during a rebuild are bookkeeping, like the new session's ID and its logs. Anything the new session doesn't receive, including old tool results, can still be opened by its ID.
 
-The rebuild itself calls no model. The next answer then processes the new context, and I don't have a measured cost for that yet: in a synthetic trial, replies right after a rebuild took about 34 to 66 seconds, but that includes the whole answer, not just the rebuild.
+The rebuild itself calls no model. The next answer then processes the new context, and measuring that cost is one of my next tests.
 
 A rebuild still takes work, and the window is still finite, so a production version needs a clear policy for what stays in the session, what gets reopened, and when to start fresh.
 
